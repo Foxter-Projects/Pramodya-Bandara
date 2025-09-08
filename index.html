@@ -1,0 +1,739 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Game Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    body {
+        font-family: 'Courier New', monospace;
+        background: linear-gradient(45deg, #0a0a0a, #1a1a2e);
+        color: #fff;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+    }
+
+    /* Animated background particles */
+    .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    .particle {
+        position: absolute;
+        background: #00ffff;
+        width: 2px;
+        height: 2px;
+        border-radius: 50%;
+        animation: float 6s infinite linear;
+        opacity: 0.7;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(100vh) rotate(0deg);
+            opacity: 0;
+        }
+        10% {
+            opacity: 0.7;
+        }
+        90% {
+            opacity: 0.7;
+        }
+        100% {
+            transform: translateY(-100vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    /* Navigation */
+    nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 1rem 2rem;
+        background: rgba(10, 10, 10, 0.9);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        border-bottom: 1px solid #00ffff;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    nav a {
+        color: #fff;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    nav a:hover {
+        color: #00ffff;
+        text-shadow: 0 0 10px #00ffff;
+    }
+
+    nav a::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #00ffff;
+        transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+        width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+    }
+
+    .glitch {
+        font-size: 4rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        position: relative;
+        color: #fff;
+        letter-spacing: 0.1em;
+        animation: glitch 2s infinite;
+    }
+
+    @keyframes glitch {
+        0%, 100% {
+            text-shadow: 
+                0.05em 0 0 #00ffff,
+                -0.05em -0.025em 0 #ff00ff,
+                0.025em 0.05em 0 #ffff00;
+        }
+        15% {
+            text-shadow: 
+                0.05em 0 0 #00ffff,
+                -0.05em -0.025em 0 #ff00ff,
+                0.025em 0.05em 0 #ffff00;
+        }
+        16% {
+            text-shadow: 
+                -0.05em -0.025em 0 #00ffff,
+                0.025em 0.025em 0 #ff00ff,
+                -0.05em -0.05em 0 #ffff00;
+        }
+        49% {
+            text-shadow: 
+                -0.05em -0.025em 0 #00ffff,
+                0.025em 0.025em 0 #ff00ff,
+                -0.05em -0.05em 0 #ffff00;
+        }
+        50% {
+            text-shadow: 
+                0.025em 0.05em 0 #00ffff,
+                0.05em 0 0 #ff00ff,
+                0 -0.05em 0 #ffff00;
+        }
+        99% {
+            text-shadow: 
+                0.025em 0.05em 0 #00ffff,
+                0.05em 0 0 #ff00ff,
+                0 -0.05em 0 #ffff00;
+        }
+    }
+
+    .subtitle {
+        font-size: 1.5rem;
+        color: #00ffff;
+        margin: 1rem 0;
+        opacity: 0;
+        animation: fadeInUp 1s ease 0.5s forwards;
+    }
+
+    .cta-button {
+        background: linear-gradient(45deg, #00ffff, #ff00ff);
+        border: none;
+        padding: 1rem 2rem;
+        color: #000;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        margin-top: 2rem;
+        transition: all 0.3s ease;
+        opacity: 0;
+        animation: fadeInUp 1s ease 1s forwards;
+    }
+
+    .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0, 255, 255, 0.3);
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Section Styling */
+    .section {
+        padding: 5rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .section h2 {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 3rem;
+        color: #00ffff;
+        text-shadow: 0 0 20px #00ffff;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .project-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid #00ffff;
+        border-radius: 10px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .project-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .project-card:hover::before {
+        left: 100%;
+    }
+
+    .project-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+        border-color: #ff00ff;
+    }
+
+    .project-title {
+        font-size: 1.5rem;
+        color: #fff;
+        margin-bottom: 1rem;
+    }
+
+    .project-description {
+        color: #ccc;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .tech-tag {
+        background: #00ffff;
+        color: #000;
+        padding: 0.3rem 0.8rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+
+    .project-links {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .project-link {
+        color: #00ffff;
+        text-decoration: none;
+        border: 1px solid #00ffff;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+
+    .project-link:hover {
+        background: #00ffff;
+        color: #000;
+    }
+
+    /* Skills Section */
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+
+    .skill-category {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid #ff00ff;
+        border-radius: 10px;
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .skill-category h3 {
+        color: #ff00ff;
+        margin-bottom: 1.5rem;
+        font-size: 1.3rem;
+    }
+
+    .skill-list {
+        list-style: none;
+    }
+
+    .skill-list li {
+        margin: 0.8rem 0;
+        color: #ccc;
+    }
+
+    /* About Section */
+    .about-content {
+        text-align: center;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #ccc;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    /* Contact Section */
+    .contact-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .contact-item {
+        color: #00ffff;
+        text-decoration: none;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+    }
+
+    .contact-item:hover {
+        text-shadow: 0 0 10px #00ffff;
+        transform: scale(1.1);
+    }
+
+    /* Mini Game */
+    .mini-game {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid #00ffff;
+        border-radius: 10px;
+        padding: 2rem;
+        margin: 3rem auto;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    .game-board {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+        margin: 1rem auto;
+        max-width: 200px;
+    }
+
+    .game-cell {
+        width: 60px;
+        height: 60px;
+        background: rgba(0, 255, 255, 0.1);
+        border: 1px solid #00ffff;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .game-cell:hover {
+        background: rgba(0, 255, 255, 0.3);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .glitch {
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+        }
+        
+        nav ul {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .projects-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <!-- Animated background particles -->
+    <div class="particles" id="particles"></div>
+
+```
+<!-- Navigation -->
+<nav>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <h1 class="glitch">Pramodya Bandara</h1>
+    <p class="subtitle">Unity Game Developer from Sri Lanka</p>
+    <button class="cta-button" onclick="document.getElementById('projects').scrollIntoView()">
+        View My Work
+    </button>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="section">
+    <h2>Featured Projects</h2>
+    <div class="projects-grid">
+        <div class="project-card">
+            <h3 class="project-title">Snake Web Game</h3>
+            <p class="project-description">
+                A classic snake game reimagined for the web with smooth controls and responsive design. 
+                Built using vanilla JavaScript with clean HTML5 Canvas graphics for an engaging retro gaming experience.
+            </p>
+            <div class="tech-stack">
+                <span class="tech-tag">HTML</span>
+                <span class="tech-tag">CSS</span>
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">Canvas</span>
+            </div>
+            <div class="project-links">
+                <a href="#" class="project-link">Play Game</a>
+                <a href="#" class="project-link">View Code</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3 class="project-title">Memory Card Matching</h3>
+            <p class="project-description">
+                A fun and challenging memory card matching game that tests your cognitive skills. Features smooth 
+                animations, score tracking, and responsive design built with modern web technologies.
+            </p>
+            <div class="tech-stack">
+                <span class="tech-tag">HTML</span>
+                <span class="tech-tag">CSS</span>
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">Animations</span>
+            </div>
+            <div class="project-links">
+                <a href="#" class="project-link">Play Game</a>
+                <a href="#" class="project-link">View Code</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3 class="project-title">Devil Hunter</h3>
+            <p class="project-description">
+                An action-packed Unity game featuring immersive gameplay and stunning low-poly visuals. 
+                Combines engaging mechanics with polished art assets created using Blender and Affinity Designer.
+            </p>
+            <div class="tech-stack">
+                <span class="tech-tag">Unity</span>
+                <span class="tech-tag">C#</span>
+                <span class="tech-tag">Blender</span>
+                <span class="tech-tag">Affinity Designer</span>
+            </div>
+            <div class="project-links">
+                <a href="#" class="project-link">Play Game</a>
+                <a href="#" class="project-link">Learn More</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <h3 class="project-title">More Projects Coming Soon</h3>
+            <p class="project-description">
+                I'm constantly working on new and exciting projects! This space will showcase my latest 
+                game development work, experiments, and creative endeavors. Stay tuned for updates.
+            </p>
+            <div class="tech-stack">
+                <span class="tech-tag">Unity</span>
+                <span class="tech-tag">C#</span>
+                <span class="tech-tag">Web Technologies</span>
+                <span class="tech-tag">Innovation</span>
+            </div>
+            <div class="project-links">
+                <a href="#contact" class="project-link">Get in Touch</a>
+                <a href="https://github.com/PramodyaBandara" class="project-link" target="_blank">Follow Progress</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Mini-Game -->
+    <div class="mini-game">
+        <h3>Try This Mini Tic-Tac-Toe!</h3>
+        <div class="game-board" id="ticTacToe">
+            <!-- Game cells will be generated by JavaScript -->
+        </div>
+        <p id="gameStatus">Player X's turn</p>
+        <button class="cta-button" onclick="resetGame()">Reset Game</button>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="section">
+    <h2>Skills & Technologies</h2>
+    <div class="skills-grid">
+        <div class="skill-category">
+            <h3>Game Development</h3>
+            <ul class="skill-list">
+                <li>Unity Engine</li>
+                <li>C# Programming</li>
+                <li>Cross-platform Development</li>
+                <li>Game Optimization</li>
+            </ul>
+        </div>
+        <div class="skill-category">
+            <h3>3D Art & Design</h3>
+            <ul class="skill-list">
+                <li>Blender (Low Poly 3D)</li>
+                <li>Photoshop</li>
+                <li>Affinity Designer</li>
+                <li>3D Modeling</li>
+                <li>UI/UX Design</li>
+            </ul>
+        </div>
+        <div class="skill-category">
+            <h3>Platforms</h3>
+            <ul class="skill-list">
+                <li>Mobile (Android/iOS)</li>
+                <li>PC (Windows/Mac/Linux)</li>
+                <li>Web (WebGL)</li>
+                <li>Cross-platform Deployment</li>
+            </ul>
+        </div>
+        <div class="skill-category">
+            <h3>Project Management</h3>
+            <ul class="skill-list">
+                <li>Game Design Principles</li>
+                <li>Agile Development</li>
+                <li>Team Collaboration</li>
+                <li>Client Communication</li>
+                <li>Quality Assurance</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="section">
+    <h2>About Me</h2>
+    <div class="about-content">
+        <p>
+            I'm Pramodya Bandara, a passionate game developer from Sri Lanka with a deep love for creating 
+            immersive gaming experiences. From a young age, I've been fascinated by games – exploring what 
+            makes them tick and understanding how they create those unforgettable moments that stay with us forever.
+        </p>
+        <br>
+        <p>
+            I studied game development at the <strong>Ceylon School of Game Design</strong>, where I participated 
+            in numerous game jams and development projects. This foundation taught me the fundamentals of game 
+            design, programming, and project management that I use in every project today.
+        </p>
+        <br>
+        <p>
+            My professional journey includes working as a Game Developer at <strong>Heladev (2022-2024)</strong>, 
+            where I developed and maintained various game projects, collaborating with talented teams to create 
+            engaging gameplay experiences. Currently, I work as a <strong>freelance game developer</strong>, 
+            providing custom Unity development services to clients worldwide.
+        </p>
+        <br>
+        <p>
+            I specialize in Unity engine development with C# programming, creating games for mobile and PC platforms. 
+            My expertise extends to low-poly 3D modeling in Blender and visual design using Photoshop and Affinity Designer. 
+            Gaming isn't just my profession – it's my passion, and I'm constantly seeking new challenges and creative 
+            opportunities in this ever-evolving industry.
+        </p>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="section">
+    <h2>Get In Touch</h2>
+    <div class="contact-info">
+        <a href="mailto:pramodya.site@gmail.com" class="contact-item">📧 Email</a>
+        <a href="https://github.com/PramodyaBandara" class="contact-item" target="_blank">🐙 GitHub</a>
+        <a href="https://www.linkedin.com/in/pramodyabandara" class="contact-item" target="_blank">💼 LinkedIn</a>
+        <a href="#" class="contact-item" onclick="alert('Coming soon! Portfolio will be available here.')">🎮 Itch.io</a>
+    </div>
+</section>
+
+<script>
+    // Create floating particles
+    function createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        const numberOfParticles = 50;
+
+        for (let i = 0; i < numberOfParticles; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            particlesContainer.appendChild(particle);
+        }
+    }
+
+    // Tic-Tac-Toe Game Logic
+    let currentPlayer = 'X';
+    let gameBoard = ['', '', '', '', '', '', '', '', ''];
+    let gameActive = true;
+
+    function createTicTacToe() {
+        const board = document.getElementById('ticTacToe');
+        for (let i = 0; i < 9; i++) {
+            const cell = document.createElement('div');
+            cell.className = 'game-cell';
+            cell.dataset.index = i;
+            cell.addEventListener('click', makeMove);
+            board.appendChild(cell);
+        }
+    }
+
+    function makeMove(e) {
+        const index = e.target.dataset.index;
+        if (gameBoard[index] === '' && gameActive) {
+            gameBoard[index] = currentPlayer;
+            e.target.textContent = currentPlayer;
+            e.target.style.color = currentPlayer === 'X' ? '#00ffff' : '#ff00ff';
+            
+            if (checkWinner()) {
+                document.getElementById('gameStatus').textContent = `Player ${currentPlayer} wins!`;
+                gameActive = false;
+            } else if (gameBoard.every(cell => cell !== '')) {
+                document.getElementById('gameStatus').textContent = 'It\'s a tie!';
+                gameActive = false;
+            } else {
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                document.getElementById('gameStatus').textContent = `Player ${currentPlayer}'s turn`;
+            }
+        }
+    }
+
+    function checkWinner() {
+        const winPatterns = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+            [0, 4, 8], [2, 4, 6] // diagonals
+        ];
+
+        return winPatterns.some(pattern => {
+            return pattern.every(index => {
+                return gameBoard[index] === currentPlayer;
+            });
+        });
+    }
+
+    function resetGame() {
+        currentPlayer = 'X';
+        gameBoard = ['', '', '', '', '', '', '', '', ''];
+        gameActive = true;
+        document.getElementById('gameStatus').textContent = `Player ${currentPlayer}'s turn`;
+        
+        const cells = document.querySelectorAll('.game-cell');
+        cells.forEach(cell => {
+            cell.textContent = '';
+            cell.style.color = '#fff';
+        });
+    }
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+    });
+
+    // Initialize everything when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        createParticles();
+        createTicTacToe();
+    });
+
+    // Add scroll effect to navigation
+    window.addEventListener('scroll', function() {
+        const nav = document.querySelector('nav');
+        if (window.scrollY > 50) {
+            nav.style.background = 'rgba(10, 10, 10, 0.95)';
+        } else {
+            nav.style.background = 'rgba(10, 10, 10, 0.9)';
+        }
+    });
+</script>
+```
+
+</body>
+</html>
