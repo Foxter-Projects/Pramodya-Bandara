@@ -357,23 +357,194 @@
     }
 
     /* Contact Section */
-    .contact-info {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 2rem;
-        text-align: center;
+    .contact-section {
+        position: relative;
     }
 
-    .contact-item {
+    .contact-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .contact-cta {
+        font-size: 1.8rem;
         color: #00ffff;
-        text-decoration: none;
-        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 15px #00ffff;
+    }
+
+    .availability-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(0, 255, 0, 0.1);
+        border: 1px solid #00ff00;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+    }
+
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        background: #00ff00;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 0.5;
+            transform: scale(1.2);
+        }
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .contact-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid transparent;
+        border-radius: 15px;
+        padding: 2rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        cursor: pointer;
+    }
+
+    .contact-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 15px;
+        padding: 2px;
+        background: linear-gradient(45deg, transparent, var(--card-color), transparent);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: exclude;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .contact-card:hover::before {
+        opacity: 1;
+    }
+
+    .contact-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .email-card {
+        --card-color: #00ffff;
+    }
+
+    .github-card {
+        --card-color: #ff00ff;
+    }
+
+    .linkedin-card {
+        --card-color: #ffff00;
+    }
+
+    .itch-card {
+        --card-color: #ff6b6b;
+    }
+
+    .contact-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        display: block;
         transition: all 0.3s ease;
     }
 
-    .contact-item:hover {
-        text-shadow: 0 0 10px #00ffff;
-        transform: scale(1.1);
+    .contact-card:hover .contact-icon {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 10px var(--card-color));
+    }
+
+    .contact-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: #fff;
+    }
+
+    .contact-description {
+        color: #ccc;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.5;
+    }
+
+    .contact-button {
+        background: linear-gradient(45deg, var(--card-color), rgba(255, 255, 255, 0.2));
+        border: none;
+        color: #000;
+        padding: 0.8rem 1.5rem;
+        border-radius: 25px;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .contact-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Floating particles for contact section */
+    .contact-particles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .contact-particle {
+        position: absolute;
+        background: var(--particle-color, #00ffff);
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        animation: floatContact 8s infinite linear;
+        opacity: 0.6;
+    }
+
+    @keyframes floatContact {
+        0% {
+            transform: translateY(100%) translateX(-50px);
+            opacity: 0;
+        }
+        10%, 90% {
+            opacity: 0.6;
+        }
+        100% {
+            transform: translateY(-100%) translateX(50px);
+            opacity: 0;
+        }
     }
 
     /* Mini Game */
@@ -627,13 +798,46 @@
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="section">
+<section id="contact" class="section contact-section">
     <h2>Get In Touch</h2>
-    <div class="contact-info">
-        <a href="mailto:pramodya.site@gmail.com" class="contact-item">📧 Email</a>
-        <a href="https://github.com/PramodyaBandara" class="contact-item" target="_blank">🐙 GitHub</a>
-        <a href="https://www.linkedin.com/in/pramodyabandara" class="contact-item" target="_blank">💼 LinkedIn</a>
-        <a href="#" class="contact-item" onclick="alert('Coming soon! Portfolio will be available here.')">🎮 Itch.io</a>
+    <div class="contact-header">
+        <p class="contact-cta">Let's Build Something Amazing Together</p>
+        <div class="availability-status">
+            <div class="status-dot"></div>
+            Available for Freelance Work
+        </div>
+    </div>
+    
+    <div class="contact-particles" id="contactParticles"></div>
+    
+    <div class="contact-grid">
+        <div class="contact-card email-card">
+            <span class="contact-icon">📧</span>
+            <h3 class="contact-title">Email Me</h3>
+            <p class="contact-description">Ready to discuss your next project? Drop me a line and let's make it happen!</p>
+            <a href="mailto:pramodya.site@gmail.com" class="contact-button">Send Email</a>
+        </div>
+        
+        <div class="contact-card github-card">
+            <span class="contact-icon">🐙</span>
+            <h3 class="contact-title">GitHub</h3>
+            <p class="contact-description">Explore my code, contributions, and open-source projects on GitHub.</p>
+            <a href="https://github.com/PramodyaBandara" class="contact-button" target="_blank">View Profile</a>
+        </div>
+        
+        <div class="contact-card linkedin-card">
+            <span class="contact-icon">💼</span>
+            <h3 class="contact-title">LinkedIn</h3>
+            <p class="contact-description">Connect with me professionally and stay updated with my latest work.</p>
+            <a href="https://www.linkedin.com/in/pramodyabandara" class="contact-button" target="_blank">Connect</a>
+        </div>
+        
+        <div class="contact-card itch-card">
+            <span class="contact-icon">🎮</span>
+            <h3 class="contact-title">Itch.io</h3>
+            <p class="contact-description">Play my games and follow my gamedev journey on the indie platform.</p>
+            <a href="#" class="contact-button" onclick="alert('Coming soon! Portfolio will be available here.')">Coming Soon</a>
+        </div>
     </div>
 </section>
 
@@ -728,10 +932,30 @@
         });
     });
 
+    // Create floating particles for contact section
+    function createContactParticles() {
+        const contactParticlesContainer = document.getElementById('contactParticles');
+        if (!contactParticlesContainer) return;
+        
+        const colors = ['#00ffff', '#ff00ff', '#ffff00', '#ff6b6b'];
+        const numberOfParticles = 15;
+
+        for (let i = 0; i < numberOfParticles; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'contact-particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            particle.style.setProperty('--particle-color', colors[Math.floor(Math.random() * colors.length)]);
+            contactParticlesContainer.appendChild(particle);
+        }
+    }
+
     // Initialize everything when page loads
     document.addEventListener('DOMContentLoaded', function() {
         createParticles();
         createTicTacToe();
+        createContactParticles();
     });
 
     // Add scroll effect to navigation
