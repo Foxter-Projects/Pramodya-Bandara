@@ -1,15 +1,58 @@
 // Create floating particles
 function createParticles() {
     const particlesContainer = document.getElementById('particles');
+    
+    // Check if container exists
+    if (!particlesContainer) {
+        console.error('Particles container not found! Make sure you have <div class="particles" id="particles"></div> in your HTML');
+        return;
+    }
+    
+    // Clear existing particles first
+    particlesContainer.innerHTML = '';
+    
     const numberOfParticles = 50;
+    const colors = ['#00ffff', '#ff00ff', '#ffff00', '#ff6b6b'];
 
     for (let i = 0; i < numberOfParticles; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
+        
+        // Random horizontal position
         particle.style.left = Math.random() * 100 + '%';
+        
+        // Random animation delay (0 to 6 seconds)
         particle.style.animationDelay = Math.random() * 6 + 's';
+        
+        // Random animation duration (3 to 6 seconds)
         particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        
+        // Random color selection
+        particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        
+        // Random size variation
+        const size = Math.random() * 2 + 1; // 1-3px
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        
+        // Add the particle to container
         particlesContainer.appendChild(particle);
+    }
+    
+    console.log(`✓ Created ${numberOfParticles} particles successfully`);
+}
+
+function adjustParticlesForDevice() {
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+        // Reduce particles on mobile for better performance
+        const particles = document.querySelectorAll('.particle');
+        particles.forEach((particle, index) => {
+            if (index > 25) { // Keep only first 25 particles on mobile
+                particle.remove();
+            }
+        });
+        console.log('✓ Reduced particles for mobile device');
     }
 }
 
@@ -41,10 +84,10 @@ function makeMove(e) {
         e.target.style.color = currentPlayer === 'X' ? 'var(--primary-color)' : 'var(--secondary-color)';
         
         if (checkWinner()) {
-            document.getElementById('gameStatus').textContent = `Player ${currentPlayer} wins!`;
+            document.getElementById('gameStatus').textContent = `Player ${currentPlayer} wins! 🎉`;
             gameActive = false;
         } else if (gameBoard.every(cell => cell !== '')) {
-            document.getElementById('gameStatus').textContent = 'It\'s a tie!';
+            document.getElementById('gameStatus').textContent = 'It\'s a tie! 🤝';
             gameActive = false;
         } else {
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
@@ -71,14 +114,20 @@ function resetGame() {
     currentPlayer = 'X';
     gameBoard = ['', '', '', '', '', '', '', '', ''];
     gameActive = true;
-    document.getElementById('gameStatus').textContent = `Player ${currentPlayer}'s turn`;
+    
+    const gameStatus = document.getElementById('gameStatus');
+    if (gameStatus) {
+        gameStatus.textContent = `Player ${currentPlayer}'s turn`;
+    }
     
     const cells = document.querySelectorAll('.game-cell');
-    cells.forEach(cell => {
+    cells.forEach((cell, index) => {
         cell.textContent = '';
-        cell.setAttribute('aria-label', `Cell ${parseInt(cell.dataset.index)+1}, empty`);
+        cell.setAttribute('aria-label', `Cell ${index+1}, empty`);
         cell.style.color = '#fff';
     });
+    
+    console.log('✓ Game reset');
 }
 
 // Smooth scrolling for navigation links
@@ -97,8 +146,11 @@ function setupSmoothScrolling() {
                 }
             }
             
-            // Close mobile menu if open
-            document.getElementById('nav-menu').classList.remove('show');
+            // Close mobile menu if open - FIX: Add null check
+            const navMenu = document.getElementById('nav-menu');
+            if (navMenu) {
+                navMenu.classList.remove('show');
+            }
         });
     });
 }
@@ -106,9 +158,11 @@ function setupSmoothScrolling() {
 // Mobile navigation toggle
 function setupMobileNavigation() {
     const navToggle = document.querySelector('.nav-toggle');
-    if (navToggle) {
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (navToggle && navMenu) {
         navToggle.addEventListener('click', function() {
-            document.getElementById('nav-menu').classList.toggle('show');
+            navMenu.classList.toggle('show');
         });
     }
 }
@@ -134,8 +188,10 @@ function createContactParticles() {
 
 // Add scroll effect to navigation
 function setupNavScrollEffect() {
+    const nav = document.querySelector('nav');
+    if (!nav) return; // Add this null check
+    
     window.addEventListener('scroll', function() {
-        const nav = document.querySelector('nav');
         if (window.scrollY > 50) {
             nav.style.background = 'rgba(10, 10, 10, 0.95)';
         } else {
@@ -163,6 +219,9 @@ function highlightActiveNavLink() {
 
 // Initialize everything when page loads
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Initializing portfolio website...');
+    
+    // Initialize all features
     createParticles();
     createTicTacToe();
     createContactParticles();
@@ -170,4 +229,23 @@ document.addEventListener('DOMContentLoaded', function() {
     setupMobileNavigation();
     setupNavScrollEffect();
     highlightActiveNavLink();
+    
+    // Adjust particles for mobile devices (call after particles are created)
+    setTimeout(() => {
+        adjustParticlesForDevice();
+    }, 50);
+    
+    // Debug: Check if particles are working
+    setTimeout(() => {
+        const particlesContainer = document.getElementById('particles');
+        if (particlesContainer) {
+            console.log('Particles container found:', particlesContainer);
+            console.log('Number of particles created:', particlesContainer.children.length);
+            if (particlesContainer.children.length === 0) {
+                console.error('❌ No particles were created! Check your CSS animations.');
+            }
+        } else {
+            console.error('❌ Particles container not found in DOM!');
+        }
+    }, 100);
 });
