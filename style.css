@@ -12,6 +12,7 @@
     --background-light: #1a1a2e;
     --text-color: #fff;
     --text-secondary: #ccc;
+    --con-btn-color: #00ffc8;
 }
 
 html {
@@ -383,6 +384,21 @@ nav a.active::after {
     margin: 0 auto;
 }
 
+/* Links inside About Section */
+.about-content a {
+    color:skyblue;  /* link color */
+    font-weight: bold;     /* make it bold */
+    text-decoration: none; /* remove underline */
+}
+
+/* Hover effect for Links inside the About Section*/
+.about-content a:hover {
+    color:cadetblue;  /* link color */
+    font-weight: bold;   /* make it bold */
+    text-decoration: none; /* remove underline */
+    outline: none;
+}
+
 /* Contact Section */
 .contact-section {
     position: relative;
@@ -478,21 +494,36 @@ nav a.active::after {
 }
 
 .email-card {
-    --card-color: var(--primary-color);
+    --card-color: var(--con-btn-color);
 }
 
 .github-card {
-    --card-color: var(--secondary-color);
+    --card-color: var(--con-btn-color);
 }
 
 .linkedin-card {
-    --card-color: var(--accent-color);
+    --card-color: var(--con-btn-color);
 }
 
-.itch-card {
-    --card-color: #ff6b6b;
+
+/* Contact Icon Images */
+.contact-icon-img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 0.3s ease;
+    filter: brightness(0.8); /* Slightly dim by default */
 }
 
+.contact-card:hover .contact-icon-img {
+    transform: scale(1.2);
+    filter: brightness(1.2) drop-shadow(0 0 10px var(--primary-color));
+}
+
+/*
 .contact-icon {
     font-size: 3rem;
     margin-bottom: 1rem;
@@ -504,6 +535,7 @@ nav a.active::after {
     transform: scale(1.2);
     filter: drop-shadow(0 0 10px var(--card-color));
 }
+*/
 
 .contact-title {
     font-size: 1.3rem;
@@ -522,7 +554,7 @@ nav a.active::after {
 .contact-button {
     background: linear-gradient(45deg, var(--card-color), rgba(255, 255, 255, 0.2));
     border: none;
-    color: #000;
+    color:rgb(27, 28, 44);
     padding: 0.8rem 1.5rem;
     border-radius: 25px;
     font-weight: bold;
