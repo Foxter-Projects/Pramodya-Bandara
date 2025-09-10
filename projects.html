@@ -31,15 +31,15 @@
         <a href="index.html#projects" class="cta-button">Back to Featured</a>
     </section>
 
-    <!-- All Projects Section -->
+    <!-- Projects Sections -->
     <section class="section">
         <h2>Complete Portfolio</h2>
-        <div class="projects-grid">
 
-            <!------------ 1.Snake Web Game ------------>
-            <div class="project-card">
-                <h3 class="project-title">Snake Web Game</h3>
-                <p class="project-description">
+        <!-- Project: Snake Web Game -->
+        <div class="project-section">
+            <div class="project-content">
+                <h3>Snake Web Game</h3>
+                <p>
                     A classic snake game reimagined for the web with smooth controls and responsive design. 
                     Built using vanilla JavaScript with clean HTML5 Canvas graphics for an engaging retro gaming experience.
                 </p>
@@ -50,18 +50,33 @@
                     <span class="tech-tag">Canvas</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://foxter-projects.github.io/Snake-Web-Game" class="project-link" target="_blank">Play Game Online</a>
-                    
-                    <!--
-                    <a href="https://github.com/Foxter-Projects/Snake-Web-Game.git" class="project-link" target="_blank">View Code</a>
-                    -->
+                    <a href="https://foxter-projects.github.io/Snake-Web-Game" target="_blank" class="project-link">Play Game Online</a>
                 </div>
             </div>
+            <div class="project-media">
+                <div class="media-slideshow">
+                    <div class="slide active">
+                        <img src="images/snake1.png" alt="Snake Game Screenshot 1">
+                    </div>
+                    <div class="slide">
+                        <img src="images/snake2.png" alt="Snake Game Screenshot 2">
+                    </div>
+                    <!-- YouTube video example -->
+                    <div class="slide">
+                        <iframe width="100%" height="250" src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID" 
+                            title="Snake Game Demo" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <button class="prev-slide">&#10094;</button>
+                    <button class="next-slide">&#10095;</button>
+                </div>
+            </div>
+        </div>
 
-            <!------------ 2.Memory Card Matching Game ------------>
-            <div class="project-card">
-                <h3 class="project-title">Memory Card Matching</h3>
-                <p class="project-description">
+        <!-- Project: Memory Card Matching -->
+        <div class="project-section alt">
+            <div class="project-content">
+                <h3>Memory Card Matching</h3>
+                <p>
                     A fun and challenging memory card matching game that tests your cognitive skills. Features smooth 
                     animations, score tracking, and responsive design built with modern web technologies.
                 </p>
@@ -72,19 +87,30 @@
                     <span class="tech-tag">Animations</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://foxter-projects.github.io/Memory-Card-Matching" class="project-link" target="_blank">Play Game Online</a>
-                    
-                    <!--
-                    <a href="https://github.com/Foxter-Projects/Memory-Card-Matching.git" class="project-link" target="_blank">View Code</a>
-                    -->
+                    <a href="https://foxter-projects.github.io/Memory-Card-Matching" target="_blank" class="project-link">Play Game Online</a>
                 </div>
             </div>
+            <div class="project-media">
+                <div class="media-slideshow">
+                    <div class="slide active">
+                        <img src="images/memory1.png" alt="Memory Game Screenshot 1">
+                    </div>
+                    <div class="slide">
+                        <iframe width="100%" height="250" src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID" 
+                            title="Memory Game Demo" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <button class="prev-slide">&#10094;</button>
+                    <button class="next-slide">&#10095;</button>
+                </div>
+            </div>
+        </div>
 
-            <!------------ 3.Beach Patrol Game ------------>
-            <div class="project-card">
-                <h3 class="project-title">Beach Patrol</h3>
-                <p class="project-description">
-                    An simple action-packed Unity game featuring immersive gameplay and stunning 2D visuals. 
+        <!-- Project: Beach Patrol -->
+        <div class="project-section">
+            <div class="project-content">
+                <h3>Beach Patrol</h3>
+                <p>
+                    A simple action-packed Unity game featuring immersive gameplay and stunning 2D visuals. 
                     Combines engaging mechanics with polished art assets created using Affinity Designer.
                 </p>
                 <div class="tech-stack">
@@ -93,14 +119,30 @@
                     <span class="tech-tag">Affinity Designer</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://foxter-projects.github.io/Beach-Patrol-Game" class="project-link" target="_blank">Play Game Online</a>
+                    <a href="https://foxter-projects.github.io/Beach-Patrol-Game" target="_blank" class="project-link">Play Game Online</a>
                 </div>
             </div>
+            <div class="project-media">
+                <div class="media-slideshow">
+                    <div class="slide active">
+                        <img src="images/beach1.png" alt="Beach Patrol Screenshot 1">
+                    </div>
+                    <div class="slide">
+                        <iframe width="100%" height="250" src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID" 
+                            title="Beach Patrol Demo" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <button class="prev-slide">&#10094;</button>
+                    <button class="next-slide">&#10095;</button>
+                </div>
+            </div>
+        </div>
 
-            <!------------ 4.Bounty Run Game ------------>
-            <div class="project-card">
-                <h3 class="project-title">Bounty Run</h3>
-                <p class="project-description">
+        <!-- Repeat same structure for Bounty Run, Doggy Walker, Rocket Boost, Adventure of Tori -->
+        <!-- Example for Bounty Run -->
+        <div class="project-section alt">
+            <div class="project-content">
+                <h3>Bounty Run</h3>
+                <p>
                     Who will be the hero? In this chaotic race, players dash with unpredictable 
                     speed, chasing victory and the chance to stop a sneaky thief! Name your racers, 
                     cheer them on, and watch as fate decides who crosses the finish line 
@@ -111,70 +153,24 @@
                     <span class="tech-tag">C#</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://foxter-projects.github.io/Bounty-Run-Game" class="project-link" target="_blank">Play Game Online</a>
+                    <a href="https://foxter-projects.github.io/Bounty-Run-Game" target="_blank" class="project-link">Play Game Online</a>
                 </div>
             </div>
-
-            <!------------ 5.Doggy Walker Game ------------>
-            <div class="project-card">
-                <h3 class="project-title">Doggy Walker</h3>
-                <p class="project-description">
-                    "Race against the clock! Tap fast and spawn as many playful pups 
-                    as you can before the countdown hits zero.
-                    Can you hit the target and unleash the pack?"
-                </p>
-                <div class="tech-stack">
-                    <span class="tech-tag">Unity</span>
-                    <span class="tech-tag">C#</span>
-                    <span class="tech-tag">Photoshop</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://foxter-projects.github.io/Doggy-Walker-Game" class="project-link" target="_blank">Play Game Online</a>
-                </div>
-            </div>
-            
-            <!------------ 5. Rocket Boost Game ------------>
-            <div class="project-card">
-                <h3 class="project-title">Rocket Boost</h3>
-                <p class="project-description">
-                    "Take control of your rocket and navigate a thrilling 3D space course! 
-                    Dodge asteroids and obstacles, collect fuel to keep flying, and grab 
-                    bonus boxes along the way. One wrong move and your rocket could crash—but 
-                    with skillful piloting, you can reach the landing zone and 
-                    complete your mission!"
-                </p>
-                <div class="tech-stack">
-                    <span class="tech-tag">Unity</span>
-                    <span class="tech-tag">C#</span>
-                    <span class="tech-tag">Blender 3D</span>
-                    <span class="tech-tag">Photoshop</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://foxter-projects.github.io/Rocket-Boost-Game" class="project-link" target="_blank">Play Game Online</a>
-                </div>
-            </div>
-            
-            <!------------ 5. The Adventure of Tori Game ------------>
-            <div class="project-card">
-                <h3 class="project-title">The Adventure of Tori</h3>
-                <p class="project-description">
-                    ""Join Tori in a thrilling 3D side-scrolling adventure! Run, jump, 
-                    and dodge obstacles while facing fearsome monsters on your journey. 
-                    Can you survive and uncover the secrets ahead?""
-                </p>
-                <div class="tech-stack">
-                    <span class="tech-tag">Unity</span>
-                    <span class="tech-tag">C#</span>
-                    <span class="tech-tag">Blender 3D</span>
-                    <span class="tech-tag">Photoshop</span>
-                    <span class="tech-tag">Illustrator</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://foxter-projects.github.io/The-Adventure-of-Tori-Game" class="project-link" target="_blank">Play Game Online</a>
+            <div class="project-media">
+                <div class="media-slideshow">
+                    <div class="slide active">
+                        <img src="images/bounty1.png" alt="Bounty Run Screenshot 1">
+                    </div>
+                    <div class="slide">
+                        <iframe width="100%" height="250" src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID" 
+                            title="Bounty Run Demo" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <button class="prev-slide">&#10094;</button>
+                    <button class="next-slide">&#10095;</button>
                 </div>
             </div>
         </div>
-        
+
         <!-- Back to Featured Button -->
         <div style="text-align: center; margin-top: 3rem;">
             <a href="index.html#projects" class="cta-button">Back to Featured Projects</a>
@@ -187,5 +183,28 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Media slideshow JS
+        document.querySelectorAll('.media-slideshow').forEach(slideshow => {
+            let slides = slideshow.querySelectorAll('.slide');
+            let currentIndex = 0;
+
+            const showSlide = index => {
+                slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+            };
+
+            slideshow.querySelector('.prev-slide').addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                showSlide(currentIndex);
+            });
+
+            slideshow.querySelector('.next-slide').addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                showSlide(currentIndex);
+            });
+
+            showSlide(currentIndex);
+        });
+    </script>
 </body>
 </html>
