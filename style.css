@@ -70,6 +70,110 @@ nav a.active {
     top: 1rem;
 }
 
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 0 1rem;
+}
+
+.glitch {
+    font-size: 4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+    color: var(--text-color);
+    letter-spacing: 0.1em;
+    animation: glitch 2s infinite;
+}
+
+@keyframes glitch {
+    0%, 100% {
+        text-shadow: 
+            0.05em 0 0 var(--primary-color),
+            -0.05em -0.025em 0 var(--secondary-color),
+            0.025em 0.05em 0 var(--accent-color);
+    }
+    15% {
+        text-shadow: 
+            0.05em 0 0 var(--primary-color),
+            -0.05em -0.025em 0 var(--secondary-color),
+            0.025em 0.05em 0 var(--accent-color);
+    }
+    16% {
+        text-shadow: 
+            -0.05em -0.025em 0 var(--primary-color),
+            0.025em 0.025em 0 var(--secondary-color),
+            -0.05em -0.05em 0 var(--accent-color);
+    }
+    49% {
+        text-shadow: 
+            -0.05em -0.025em 0 var(--primary-color),
+            0.025em 0.025em 0 var(--secondary-color),
+            -0.05em -0.05em 0 var(--accent-color);
+    }
+    50% {
+        text-shadow: 
+            0.025em 0.05em 0 var(--primary-color),
+            0.05em 0 0 var(--secondary-color),
+            0 -0.05em 0 var(--accent-color);
+    }
+    99% {
+        text-shadow: 
+            0.025em 0.05em 0 var(--primary-color),
+            0.05em 0 0 var(--secondary-color),
+            0 -0.05em 0 var(--accent-color);
+    }
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin: 1rem 0;
+    opacity: 0;
+    animation: fadeInUp 1s ease 0.5s forwards;
+}
+
+.cta-button {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    padding: 1rem 2rem;
+    color: #000;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 2rem;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeInUp 1s ease 1s forwards;
+    border-radius: 4px;
+    min-width: 160px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 255, 255, 0.3);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Sections */
 .section {
     padding: 5rem 2rem;
@@ -239,6 +343,19 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
+    .glitch {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .cta-button {
+        padding: 0.8rem 1.5rem;
+        min-width: 140px;
+    }
+
     .project-content {
         flex-direction: column;
     }
