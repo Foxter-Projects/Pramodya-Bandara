@@ -1,4 +1,4 @@
-// --- Particle Functions ---
+// ---- Particle Functions ----
 function createParticles() {
     const particlesContainer = document.getElementById('particles');
     if (!particlesContainer) return;
@@ -26,7 +26,7 @@ function adjustParticlesForDevice() {
     }
 }
 
-// --- Tic Tac Toe Game ---
+// ---- Tic Tac Toe Game ----
 let currentPlayer = 'X';
 let gameBoard = Array(9).fill('');
 let gameActive = true;
@@ -84,22 +84,49 @@ function resetGame() {
     });
 }
 
-// --- Smooth scrolling ---
+// ---- Smooth scrolling ----
 function setupSmoothScrolling() {
-    document.querySelectorAll('nav a').forEach(a=>{
-        a.addEventListener('click', e=>{
-            if (a.getAttribute('href').startsWith('#')) {
+    document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            if (this.getAttribute('href').startsWith('#')) {
                 e.preventDefault();
-                const target = document.querySelector(a.getAttribute('href'));
-                if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             }
-            const navMenu = document.getElementById('nav-menu');
-            if(navMenu) navMenu.classList.remove('show');
         });
     });
 }
 
-// --- Mobile nav ---
+// ---- Skills Section ----
+function setupSectionHighlighting() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
+    
+    if (sections.length === 0 || navLinks.length === 0) return;
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                const correspondingLink = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+                if (correspondingLink) {
+                    correspondingLink.classList.add('active');
+                }
+            }
+        });
+    }, {
+        rootMargin: '-50% 0px -50% 0px'
+    });
+    
+    sections.forEach(section => observer.observe(section));
+}
+
+// ---- Mobile nav ----
 function setupMobileNavigation() {
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.getElementById('nav-menu');
@@ -187,7 +214,7 @@ function createContactParticles() {
     console.log('✓ Contact particles created');
 }
 
-// --- Initialize everything ---
+// ---- Initialize everything ----
 document.addEventListener('DOMContentLoaded', ()=>{
     console.log('🚀 Initializing...');
     createParticles();
