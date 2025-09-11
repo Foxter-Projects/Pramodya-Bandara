@@ -89,8 +89,8 @@ nav a {
     color: var(--text-color);
     text-decoration: none;
     transition: all 0.3s ease;
-    padding: 0.5rem;
     position: relative;
+    padding: 0.5rem;
 }
 
 nav a:hover,
@@ -99,6 +99,23 @@ nav a.active {
     text-shadow: 0 0 10px var(--primary-color);
 }
 
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after,
+nav a.active::after {
+    width: 100%;
+}
+
+/* Mobile navigation */
 .nav-toggle {
     display: none;
     background: none;
@@ -687,8 +704,10 @@ footer {
         }
     }
 
+    /* Mobile Responsive Navigation*/
     nav ul {
         flex-direction: column;
+        gap: 1rem;
         display: none;
         position: absolute;
         top: 100%;
@@ -698,14 +717,12 @@ footer {
         padding: 1rem;
         border-top: 1px solid var(--primary-color);
     }
-
+    
     nav ul.show {
         display: flex;
     }
-
+    
     .nav-toggle {
         display: block;
     }
-    
-    
 }

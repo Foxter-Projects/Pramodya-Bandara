@@ -84,10 +84,11 @@ function resetGame() {
     });
 }
 
-// ---- Smooth scrolling ----
+// Smooth scrolling for navigation links
 function setupSmoothScrolling() {
     document.querySelectorAll('nav a').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
+            // Only handle internal links
             if (this.getAttribute('href').startsWith('#')) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
@@ -98,11 +99,76 @@ function setupSmoothScrolling() {
                     });
                 }
             }
+            
+            // Close mobile menu if open
+            const navMenu = document.getElementById('nav-menu');
+            if (navMenu) {
+                navMenu.classList.remove('show');
+            }
         });
     });
 }
 
-// ---- Skills Section ----
+// Mobile navigation toggle
+function setupMobileNavigation() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('show');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('show');
+            }
+        });
+    }
+}
+
+// Add scroll effect to navigation
+function setupNavScrollEffect() {
+    const nav = document.querySelector('nav');
+    if (!nav) return;
+    
+    function updateNavBackground() {
+        if (window.scrollY > 50) {
+            nav.style.background = 'rgba(10, 10, 10, 0.95)';
+            nav.style.backdropFilter = 'blur(15px)';
+        } else {
+            nav.style.background = 'rgba(10, 10, 10, 0.9)';
+            nav.style.backdropFilter = 'blur(10px)';
+        }
+    }
+    
+    window.addEventListener('scroll', updateNavBackground);
+    updateNavBackground(); // Call once to set initial state
+}
+
+// Highlight active navigation link based on current page
+function highlightActiveNavLink() {
+    const currentPage = window.location.pathname.split('/').pop();
+    const navLinks = document.querySelectorAll('nav a');
+    
+    navLinks.forEach(link => {
+        const linkHref = link.getAttribute('href');
+        link.classList.remove('active');
+        
+        // Handle different page scenarios
+        if (currentPage === 'projects.html' && linkHref === 'projects.html') {
+            link.classList.add('active');
+        } else if ((currentPage === 'index.html' || currentPage === '') && linkHref.startsWith('#')) {
+            // For index page, highlight based on hash or default to home
+            if (linkHref === '#home' || (linkHref === window.location.hash && window.location.hash)) {
+                link.classList.add('active');
+            }
+        }
+    });
+}
+
+// Add intersection observer for section highlighting on index page
 function setupSectionHighlighting() {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('nav a[href^="#"]');
@@ -112,7 +178,10 @@ function setupSectionHighlighting() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                // Remove active class from all nav links
                 navLinks.forEach(link => link.classList.remove('active'));
+                
+                // Add active class to corresponding nav link
                 const correspondingLink = document.querySelector(`nav a[href="#${entry.target.id}"]`);
                 if (correspondingLink) {
                     correspondingLink.classList.add('active');
@@ -126,15 +195,6 @@ function setupSectionHighlighting() {
     sections.forEach(section => observer.observe(section));
 }
 
-// ---- Mobile nav ----
-function setupMobileNavigation() {
-    const navToggle = document.querySelector('.nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
-    if(navToggle && navMenu){
-        navToggle.addEventListener('click', ()=> navMenu.classList.toggle('show'));
-    }
-}
-
 // --- Auto slideshow with manual override ---
 class SlideShow {
     constructor(container) {
@@ -146,7 +206,7 @@ class SlideShow {
         this.currentIndex = 0;
         this.autoSlideDelay = 2000;
         this.manualTimeout = 2000;
-
+        
         this.showSlide(this.currentIndex);
         this.startAutoSlide();
         this.setupEvents();
