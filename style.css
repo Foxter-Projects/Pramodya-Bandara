@@ -12,7 +12,7 @@
     --background-light: #1a1a2e;
     --text-color: #fff;
     --text-secondary: #ccc;
-    --con-btn-color: #00ffc8;
+    --con-btn-color: #00b7ff;
 }
 
 /*-------- Body & General Styles --------*/
@@ -529,6 +529,13 @@ nav a.active::after {
     animation: pulse 2s infinite;
 }
 
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
 @keyframes pulse {
     0%, 100% {
         opacity: 1;
@@ -538,13 +545,6 @@ nav a.active::after {
         opacity: 0.5;
         transform: scale(1.2);
     }
-}
-
-.contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
 }
 
 .contact-card {
@@ -557,6 +557,8 @@ nav a.active::after {
     overflow: hidden;
     transition: all 0.4s ease;
     cursor: pointer;
+    /* FIX: Create new stacking context */
+    isolation: isolate;
 }
 
 .contact-card::before {
@@ -575,6 +577,8 @@ nav a.active::after {
     mask-composite: exclude;
     opacity: 0;
     transition: opacity 0.4s ease;
+    /* FIX: Keep behind content */
+    z-index: -1;
 }
 
 .contact-card:hover::before {
@@ -590,16 +594,24 @@ nav a.active::after {
     --card-color: var(--primary-color);
 }
 
+.email-card .contact-button{
+    color: #000;
+}
+
 .github-card {
     --card-color: var(--secondary-color);
+}
+
+.github-card .contact-button{
+    color: #000;
 }
 
 .linkedin-card {
     --card-color: var(--accent-color);
 }
 
-.itch-card {
-    --card-color: #ff6b6b;
+.linkedin-card .contact-button{
+    color: #000;
 }
 
 /* Contact Icon Images */
@@ -612,6 +624,9 @@ nav a.active::after {
     margin-right: auto;
     transition: all 0.3s ease;
     filter: brightness(0.8);
+    /* FIX: Ensure above pseudo-element */
+    position: relative;
+    z-index: 2;
 }
 
 .contact-card:hover .contact-icon-img {
@@ -624,6 +639,9 @@ nav a.active::after {
     font-weight: bold;
     margin-bottom: 0.5rem;
     color: var(--text-color);
+    /* FIX: Ensure above pseudo-element */
+    position: relative;
+    z-index: 2;
 }
 
 .contact-description {
@@ -631,6 +649,9 @@ nav a.active::after {
     font-size: 0.9rem;
     margin-bottom: 1.5rem;
     line-height: 1.5;
+    /* FIX: Ensure above pseudo-element */
+    position: relative;
+    z-index: 2;
 }
 
 .contact-button {
@@ -646,6 +667,9 @@ nav a.active::after {
     transition: all 0.3s ease;
     text-decoration: none;
     display: inline-block;
+    /* FIX: Ensure button is clickable */
+    position: relative;
+    z-index: 10;
 }
 
 .contact-button:hover {
