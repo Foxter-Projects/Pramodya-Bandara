@@ -117,8 +117,8 @@ class SlideShow {
         this.prevBtn = container.querySelector('.prev');
         this.nextBtn = container.querySelector('.next');
         this.currentIndex = 0;
-        this.autoSlideDelay = 4000;
-        this.manualTimeout = null;
+        this.autoSlideDelay = 2000;
+        this.manualTimeout = 2000;
 
         this.showSlide(this.currentIndex);
         this.startAutoSlide();
