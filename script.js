@@ -163,6 +163,30 @@ function initSlideShows() {
     });
 }
 
+// Create floating particles for contact section
+function createContactParticles() {
+    const contactParticlesContainer = document.getElementById('contactParticles');
+    if (!contactParticlesContainer) return;
+    
+    // Clear existing particles
+    contactParticlesContainer.innerHTML = '';
+    
+    const colors = ['var(--primary-color)', 'var(--secondary-color)', 'var(--accent-color)', '#ff6b6b'];
+    const numberOfParticles = 15;
+
+    for (let i = 0; i < numberOfParticles; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'contact-particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 8 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 5) + 's';
+        particle.style.setProperty('--particle-color', colors[Math.floor(Math.random() * colors.length)]);
+        contactParticlesContainer.appendChild(particle);
+    }
+    
+    console.log('✓ Contact particles created');
+}
+
 // --- Initialize everything ---
 document.addEventListener('DOMContentLoaded', ()=>{
     console.log('🚀 Initializing...');
@@ -170,6 +194,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     createTicTacToe();
     setupSmoothScrolling();
     setupMobileNavigation();
+    createContactParticles();
     initSlideShows();
     adjustParticlesForDevice();
 });
