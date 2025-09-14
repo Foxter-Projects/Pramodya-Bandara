@@ -1,74 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Pramodya Bandara - Game Developer from Sri Lanka specializing in Unity, C#, and 3D art">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Pramodya Bandara - Game Developer from Sri Lanka specializing in Unity, C#, and 3D art" />
     <title>Pramodya Bandara - Game Developer</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     <!-- Animated background particles -->
-    <div class="particles" id="particles"></div>
+    <div class="particles" id="particles" aria-hidden="true"></div>
 
     <!-- Navigation -->
     <nav>
-        <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
-        <ul id="nav-menu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="projects.html">All Projects</a></li>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+        <ul id="nav-menu" role="menubar">
+            <li><a href="index.html" role="menuitem">Home</a></li>
+            <li><a href="#projects" role="menuitem">Projects</a></li>
+            <li><a href="#skills" role="menuitem">Skills</a></li>
+            <li><a href="#about" role="menuitem">About</a></li>
+            <li><a href="#contact" role="menuitem">Contact</a></li>
+            <li><a href="projects.html" role="menuitem">All Projects</a></li>
         </ul>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section id="home" class="hero" tabindex="-1">
         <h1 class="glitch">Pramodya Bandara</h1>
         <p class="subtitle">Game Developer from Sri Lanka</p>
-        <button class="cta-button" onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">
-            View My Work
-        </button>
+        <a class="cta-button" href="#projects">View My Work</a>
     </section>
 
     <!-- Projects Section -->
     <section id="projects" class="section">
         <h2>Featured Projects</h2>
-        
+
         <div class="projects-grid">
             <!-------- Project 1 -------->
-            <div class="project-card">
+            <article class="project-card" aria-labelledby="p1-title">
                 <div class="project-content">
-                    <div class="project-slideshow slideshow-container">
+                    <div class="project-slideshow slideshow-container" aria-hidden="false">
                         <!-- Slides: images/videos/YouTube -->
                         <div class="slide">
-                            <img src="images/project1-1.jpg" alt="Project 1 Screenshot 1">
+                            <img src="images/project1-1.jpg" alt="Project 1 Screenshot 1" />
                         </div>
                         <div class="slide">
-                            <img src="images/project1-2.jpg" alt="Project 1 Screenshot 2">
+                            <img src="images/project1-2.jpg" alt="Project 1 Screenshot 2" />
                         </div>
                         <div class="slide">
-                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Project 1 video" frameborder="0" allowfullscreen></iframe>
                         </div>
 
                         <!-- Arrows -->
-                        <a class="prev">&#10094;</a>
-                        <a class="next">&#10095;</a>
+                        <button class="prev" aria-label="Previous slide">&#10094;</button>
+                        <button class="next" aria-label="Next slide">&#10095;</button>
 
                         <!-- Dots -->
-                        <div class="dots-container">
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
+                        <div class="dots-container" role="tablist" aria-label="Project 1 slides">
+                            <button class="dot" role="tab" aria-selected="false" aria-controls="slide-0"></button>
+                            <button class="dot" role="tab" aria-selected="false" aria-controls="slide-1"></button>
+                            <button class="dot" role="tab" aria-selected="false" aria-controls="slide-2"></button>
                         </div>
                     </div>
 
                     <div class="project-text">
-                        <h3 class="project-title">Project 1</h3>
+                        <h3 id="p1-title" class="project-title">Project 1</h3>
                         <p class="project-description">
-                            This project is a 3D side-scroller where players navigate obstacles and monsters. Built using Unity, Blender3D, and Photoshop.
+                            This project is a 3D side-scroller where players navigate obstacles and monsters.
+                            Built using Unity, Blender3D, and Photoshop.
                         </p>
                         <div class="tech-stack">
                             <span class="tech-tag">Unity</span>
@@ -77,78 +76,75 @@
                             <span class="tech-tag">Photoshop</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link" target="_blank">View Demo</a>
-                            <a href="#" class="project-link" target="_blank">GitHub</a>
+                            <a href="#" class="project-link" target="_blank" rel="noopener">View Demo</a>
+                            <a href="#" class="project-link" target="_blank" rel="noopener">GitHub</a>
                         </div>
                     </div>
                 </div>
-            </div>
+            </article>
 
-            <!-------- Project 2 -------->
-            <div class="project-card">
+            <!-------- Project 2 (reuse structure) -------->
+            <article class="project-card" aria-labelledby="p2-title">
                 <div class="project-content">
-                    <div class="project-slideshow slideshow-container">
-                        <!-- Slides: images/videos/YouTube -->
+                    <div class="project-slideshow slideshow-container" aria-hidden="false">
                         <div class="slide">
-                            <img src="images/project1-1.jpg" alt="Project 1 Screenshot 1">
+                            <img src="images/project2-1.jpg" alt="Project 2 Screenshot 1" />
                         </div>
                         <div class="slide">
-                            <img src="images/project1-2.jpg" alt="Project 1 Screenshot 2">
+                            <img src="images/project2-2.jpg" alt="Project 2 Screenshot 2" />
                         </div>
                         <div class="slide">
-                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+                            <iframe width="100%" height="250" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Project 2 video" frameborder="0" allowfullscreen></iframe>
                         </div>
 
-                        <!-- Arrows -->
-                        <a class="prev">&#10094;</a>
-                        <a class="next">&#10095;</a>
+                        <button class="prev" aria-label="Previous slide">&#10094;</button>
+                        <button class="next" aria-label="Next slide">&#10095;</button>
 
-                        <!-- Dots -->
-                        <div class="dots-container">
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
+                        <div class="dots-container" role="tablist" aria-label="Project 2 slides">
+                            <button class="dot" role="tab" aria-selected="false" aria-controls="slide-0"></button>
+                            <button class="dot" role="tab" aria-selected="false" aria-controls="slide-1"></button>
+                            <button class="dot" role="tab" aria-selected="false" aria-controls="slide-2"></button>
                         </div>
                     </div>
 
                     <div class="project-text">
-                        <h3 class="project-title">Project 1</h3>
+                        <h3 id="p2-title" class="project-title">Project 2</h3>
                         <p class="project-description">
-                            This project is a 3D side-scroller where players navigate obstacles and monsters. Built using Unity, Blender3D, and Photoshop.
+                            Another exciting project with features X, Y, and Z.
+                            Includes multiple levels and interactive gameplay mechanics.
                         </p>
                         <div class="tech-stack">
-                            <span class="tech-tag">Unity</span>
+                            <span class="tech-tag">Godot</span>
                             <span class="tech-tag">C#</span>
-                            <span class="tech-tag">Blender3D</span>
-                            <span class="tech-tag">Photoshop</span>
+                            <span class="tech-tag">Illustrator</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link" target="_blank">View Demo</a>
-                            <a href="#" class="project-link" target="_blank">GitHub</a>
+                            <a href="#" class="project-link" target="_blank" rel="noopener">View Demo</a>
+                            <a href="#" class="project-link" target="_blank" rel="noopener">GitHub</a>
                         </div>
                     </div>
                 </div>
-            </div>
+            </article>
         </div>
-        
+
         <!-- View All Projects Button -->
         <div style="text-align: center; margin-top: 3rem;">
-            <a href="projects.html" class="cta-button">View All Projects</a>
+            <a href="projects.html" class="cta-button view-projects-btn">View All Projects</a>
         </div>
 
         <!-- Interactive Mini-Game -->
-        <div class="mini-game">
-            <h3>Try This Mini Tic-Tac-Toe!</h3>
-            <div class="game-board" id="ticTacToe">
+        <div class="mini-game" aria-labelledby="mini-title" role="region">
+            <h3 id="mini-title">Try This Mini Tic-Tac-Toe!</h3>
+            <div class="game-board" id="ticTacToe" role="grid" aria-label="Tic Tac Toe board">
                 <!-- Game cells will be generated by JavaScript -->
             </div>
-            <p id="gameStatus">Player X's turn</p>
+            <p id="gameStatus" aria-live="polite">Player X's turn</p>
             <button class="cta-button" onclick="resetGame()">Reset Game</button>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="section">
+    <section id="skills" class="section" tabindex="-1">
         <h2>Skills & Technologies</h2>
         <div class="skills-grid">
             <div class="skill-category">
@@ -193,79 +189,74 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section">
+    <section id="about" class="section" tabindex="-1">
         <h2>About Me</h2>
         <div class="about-content">
             <p>
-                I'm Pramodya Bandara, a passionate game developer from Sri Lanka with a deep love for creating 
-                immersive gaming experiences. From a young age, I've been fascinated by games – exploring what 
+                I'm Pramodya Bandara, a passionate game developer from Sri Lanka with a deep love for creating
+                immersive gaming experiences. From a young age, I've been fascinated by games – exploring what
                 makes them tick and understanding how they create those unforgettable moments that stay with us forever.
             </p>
-            <br>
+            <br />
             <p>
                 I studied game development at the
-                <a href="https://www.facebook.com/csgdcampus" target="_blank">Ceylon School of Game Design</a>
-                , where I participated in numerous game jams and development projects. 
-                This foundation taught me the fundamentals of game 
-                design, programming, and project management that I use in every project today.
+                <a href="https://www.facebook.com/csgdcampus" target="_blank" rel="noopener">Ceylon School of Game Design</a>,
+                where I participated in numerous game jams and development projects.
             </p>
-            <br>
+            <br />
             <p>
-                My professional journey includes working as a Game Developer at <strong>Heladev (2022-2024)</strong>, 
-                where I developed and maintained various game projects, collaborating with talented teams to create 
-                engaging gameplay experiences. Currently, I work as a <strong>freelance game developer</strong>, 
+                My professional journey includes working as a Game Developer at <strong>Heladev</strong>,
+                where I developed and maintained various game projects, collaborating with talented teams to create
+                engaging gameplay experiences. Currently, I work as a <strong>freelance game developer</strong>,
                 providing custom Unity development services to clients worldwide.
             </p>
-            <br>
+            <br />
             <p>
-                I specialize in Unity engine development with C# programming, creating games for mobile and PC platforms. 
-                My expertise extends to low-poly 3D modeling in Blender and visual design using Photoshop and Affinity Designer. 
-                Gaming isn't just my profession – it's my passion, and I'm constantly seeking new challenges and creative 
-                opportunities in this ever-evolving industry.
+                I specialize in Unity engine development with C# programming, creating games for mobile and PC platforms.
+                My expertise extends to low-poly 3D modeling in Blender and visual design using Photoshop and Affinity Designer.
             </p>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section contact-section">
+    <section id="contact" class="section contact-section" tabindex="-1">
         <h2>Get In Touch</h2>
         <div class="contact-header">
             <p class="contact-cta">Let's Build Something Amazing Together</p>
-            <div class="availability-status">
-                <div class="status-dot"></div>
+            <div class="availability-status" role="status">
+                <div class="status-dot" aria-hidden="true"></div>
                 Available for Freelance Work
             </div>
         </div>
-        
-        <div class="contact-particles" id="contactParticles"></div>
-        
+
+        <div class="contact-particles" id="contactParticles" aria-hidden="true"></div>
+
         <div class="contact-grid">
-            <div class="contact-card email-card">
-                <img src="images/icons/email.png" alt="Email" class="contact-icon-img">
+            <div class="contact-card email-card" role="article" tabindex="0">
+                <img src="images/icons/email.png" alt="Email" class="contact-icon-img" />
                 <h3 class="contact-title">Email Me</h3>
                 <p class="contact-description">Ready to discuss your next project? Drop me a line and let's make it happen!</p>
                 <a href="mailto:pramodya.site@gmail.com" class="contact-button">Send Email</a>
             </div>
-            
-            <div class="contact-card github-card">
-                <img src="images/icons/github.png" alt="GitHub" class="contact-icon-img">
+
+            <div class="contact-card github-card" role="article" tabindex="0">
+                <img src="images/icons/github.png" alt="GitHub" class="contact-icon-img" />
                 <h3 class="contact-title">GitHub</h3>
                 <p class="contact-description">Explore my code, contributions, and open-source projects on GitHub.</p>
-                <a href="https://github.com/PramodyaBandara" class="contact-button" target="_blank">View Profile</a>
+                <a href="https://github.com/PramodyaBandara" class="contact-button" target="_blank" rel="noopener">View Profile</a>
             </div>
-            
-            <div class="contact-card linkedin-card">
-                <img src="images/icons/linkedin.png" alt="LinkedIn" class="contact-icon-img">
+
+            <div class="contact-card linkedin-card" role="article" tabindex="0">
+                <img src="images/icons/linkedin.png" alt="LinkedIn" class="contact-icon-img" />
                 <h3 class="contact-title">LinkedIn</h3>
                 <p class="contact-description">Connect with me professionally and stay updated with my latest work.</p>
-                <a href="https://www.linkedin.com/in/pramodyabandara" class="contact-button" target="_blank">Connect</a>
+                <a href="https://www.linkedin.com/in/pramodyabandara" class="contact-button" target="_blank" rel="noopener">Connect</a>
             </div>
         </div>
     </section>
 
     <footer>
         <p>&copy; 2025 Pramodya Bandara. All rights reserved.</p>
-        <p>Created with GitHub Pages.</p>
     </footer>
 
     <script src="script.js"></script>

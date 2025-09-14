@@ -88,7 +88,6 @@ function resetGame() {
 function setupSmoothScrolling() {
     document.querySelectorAll('nav a').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            // Only handle internal links
             if (this.getAttribute('href').startsWith('#')) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
@@ -99,8 +98,6 @@ function setupSmoothScrolling() {
                     });
                 }
             }
-            
-            // Close mobile menu if open
             const navMenu = document.getElementById('nav-menu');
             if (navMenu) {
                 navMenu.classList.remove('show');
@@ -119,7 +116,6 @@ function setupMobileNavigation() {
             navMenu.classList.toggle('show');
         });
         
-        // Close menu when clicking outside
         document.addEventListener('click', function(e) {
             if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
                 navMenu.classList.remove('show');
@@ -144,23 +140,27 @@ function setupNavScrollEffect() {
     }
     
     window.addEventListener('scroll', updateNavBackground);
-    updateNavBackground(); // Call once to set initial state
+    updateNavBackground();
 }
 
-// Highlight active navigation link based on current page
+// ✅ GitHub Pages–friendly active nav highlight
 function highlightActiveNavLink() {
-    const currentPage = window.location.pathname.split('/').pop();
+    let currentPage = window.location.pathname.split('/').pop();
+
+    // GitHub Pages root ("/" means index.html)
+    if (currentPage === '' || currentPage === '/') {
+        currentPage = 'index.html';
+    }
+
     const navLinks = document.querySelectorAll('nav a');
-    
     navLinks.forEach(link => {
         const linkHref = link.getAttribute('href');
         link.classList.remove('active');
-        
-        // Handle different page scenarios
+
         if (currentPage === 'projects.html' && linkHref === 'projects.html') {
             link.classList.add('active');
-        } else if ((currentPage === 'index.html' || currentPage === '') && linkHref.startsWith('#')) {
-            // For index page, highlight based on hash or default to home
+        } 
+        else if (currentPage === 'index.html') {
             if (linkHref === '#home' || (linkHref === window.location.hash && window.location.hash)) {
                 link.classList.add('active');
             }
@@ -168,7 +168,7 @@ function highlightActiveNavLink() {
     });
 }
 
-// Add intersection observer for section highlighting on index page
+// Section highlighting (index page)
 function setupSectionHighlighting() {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('nav a[href^="#"]');
@@ -178,10 +178,7 @@ function setupSectionHighlighting() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Remove active class from all nav links
                 navLinks.forEach(link => link.classList.remove('active'));
-                
-                // Add active class to corresponding nav link
                 const correspondingLink = document.querySelector(`nav a[href="#${entry.target.id}"]`);
                 if (correspondingLink) {
                     correspondingLink.classList.add('active');
@@ -250,12 +247,11 @@ function initSlideShows() {
     });
 }
 
-// Create floating particles for contact section
+// Contact section particles
 function createContactParticles() {
     const contactParticlesContainer = document.getElementById('contactParticles');
     if (!contactParticlesContainer) return;
     
-    // Clear existing particles
     contactParticlesContainer.innerHTML = '';
     
     const colors = ['var(--primary-color)', 'var(--secondary-color)', 'var(--accent-color)', '#ff6b6b'];
@@ -281,7 +277,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     createTicTacToe();
     setupSmoothScrolling();
     setupMobileNavigation();
+    setupNavScrollEffect();
     createContactParticles();
     initSlideShows();
     adjustParticlesForDevice();
+    highlightActiveNavLink(); // ✅ GitHub Pages fix
 });

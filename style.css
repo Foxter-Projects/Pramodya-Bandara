@@ -17,7 +17,7 @@
 
 /*-------- Body & General Styles --------*/
 html, body {
-    font-family: 'Courier New', monospace;
+    font-family: 'Consolas', sans-serif;
     background: linear-gradient(45deg, var(--background-dark), var(--background-light));
     color: var(--text-color);
     min-height: 100vh;
@@ -152,37 +152,37 @@ nav a.active::after {
 
 @keyframes glitch {
     0%, 100% {
-        text-shadow: 
+        text-shadow:
             0.05em 0 0 var(--primary-color),
             -0.05em -0.025em 0 var(--secondary-color),
             0.025em 0.05em 0 var(--accent-color);
     }
     15% {
-        text-shadow: 
+        text-shadow:
             0.05em 0 0 var(--primary-color),
             -0.05em -0.025em 0 var(--secondary-color),
             0.025em 0.05em 0 var(--accent-color);
     }
     16% {
-        text-shadow: 
+        text-shadow:
             -0.05em -0.025em 0 var(--primary-color),
             0.025em 0.025em 0 var(--secondary-color),
             -0.05em -0.05em 0 var(--accent-color);
     }
     49% {
-        text-shadow: 
+        text-shadow:
             -0.05em -0.025em 0 var(--primary-color),
             0.025em 0.025em 0 var(--secondary-color),
             -0.05em -0.05em 0 var(--accent-color);
     }
     50% {
-        text-shadow: 
+        text-shadow:
             0.025em 0.05em 0 var(--primary-color),
             0.05em 0 0 var(--secondary-color),
             0 -0.05em 0 var(--accent-color);
     }
     99% {
-        text-shadow: 
+        text-shadow:
             0.025em 0.05em 0 var(--primary-color),
             0.05em 0 0 var(--secondary-color),
             0 -0.05em 0 var(--accent-color);
@@ -201,24 +201,32 @@ nav a.active::after {
     background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
     border: none;
     padding: 1rem 2rem;
-    color: #000;
+    color: #2b1d2a; /* Neon cyan text */
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
     margin-top: 2rem;
     transition: all 0.3s ease;
-    opacity: 0;
-    animation: fadeInUp 1s ease 1s forwards;
     border-radius: 4px;
     min-width: 160px;
     text-decoration: none;
     display: inline-block;
     text-align: center;
+
+    /* Neon glow effect */
+    text-shadow: 
+        0 0 10px #1e2525,
+}
+
+.view-projects-btn {
+    color: #2b1d2a !important; /* Forces text */
+    text-shadow: 
+        0 0 10px #1e2525,
 }
 
 .cta-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0, 255, 255, 0.3);
+    box-shadow: 0 10px 15px rgba(0, 255, 255, 0.3);
 }
 
 @keyframes fadeInUp {
@@ -306,6 +314,7 @@ nav a.active::after {
     border-radius: 50%;
     user-select: none;
     transition: background 0.3s;
+    border: none;
 }
 
 .prev:hover, .next:hover {
@@ -331,6 +340,7 @@ nav a.active::after {
     border-radius: 50%;
     display: inline-block;
     transition: background-color 0.3s;
+    border: none;
 }
 
 .dot.active {
@@ -467,27 +477,13 @@ nav a.active::after {
 }
 
 /* Section Styling (also applies to About section) */
-.section {
-    padding: 5rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.section h2 {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 3rem;
-    color: var(--primary-color);
-    text-shadow: 0 0 20px var(--primary-color);
-}
-
-.section a{
+.section a {
     text-decoration: none;
     font-weight: bold;
-    color:cadetblue;
+    color: cadetblue;
 }
 
-.section a:hover{
+.section a:hover {
     text-decoration: none;
     color: cornflowerblue;
 }
@@ -557,7 +553,6 @@ nav a.active::after {
     overflow: hidden;
     transition: all 0.4s ease;
     cursor: pointer;
-    /* FIX: Create new stacking context */
     isolation: isolate;
 }
 
@@ -571,13 +566,8 @@ nav a.active::after {
     border-radius: 15px;
     padding: 2px;
     background: linear-gradient(45deg, transparent, var(--card-color), transparent);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: exclude;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
     opacity: 0;
     transition: opacity 0.4s ease;
-    /* FIX: Keep behind content */
     z-index: -1;
 }
 
@@ -590,31 +580,10 @@ nav a.active::after {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-.email-card {
-    --card-color: var(--primary-color);
-}
+.email-card { --card-color: var(--primary-color); }
+.github-card { --card-color: var(--secondary-color); }
+.linkedin-card { --card-color: var(--accent-color); }
 
-.email-card .contact-button{
-    color: #000;
-}
-
-.github-card {
-    --card-color: var(--secondary-color);
-}
-
-.github-card .contact-button{
-    color: #000;
-}
-
-.linkedin-card {
-    --card-color: var(--accent-color);
-}
-
-.linkedin-card .contact-button{
-    color: #000;
-}
-
-/* Contact Icon Images */
 .contact-icon-img {
     width: 48px;
     height: 48px;
@@ -624,7 +593,6 @@ nav a.active::after {
     margin-right: auto;
     transition: all 0.3s ease;
     filter: brightness(0.8);
-    /* FIX: Ensure above pseudo-element */
     position: relative;
     z-index: 2;
 }
@@ -639,7 +607,6 @@ nav a.active::after {
     font-weight: bold;
     margin-bottom: 0.5rem;
     color: var(--text-color);
-    /* FIX: Ensure above pseudo-element */
     position: relative;
     z-index: 2;
 }
@@ -649,7 +616,6 @@ nav a.active::after {
     font-size: 0.9rem;
     margin-bottom: 1.5rem;
     line-height: 1.5;
-    /* FIX: Ensure above pseudo-element */
     position: relative;
     z-index: 2;
 }
@@ -657,7 +623,7 @@ nav a.active::after {
 .contact-button {
     background: linear-gradient(45deg, var(--card-color), rgba(255, 255, 255, 0.2));
     border: none;
-    color: #000;
+    color: #222022 !important;
     padding: 0.8rem 1.5rem;
     border-radius: 25px;
     font-weight: bold;
@@ -667,7 +633,6 @@ nav a.active::after {
     transition: all 0.3s ease;
     text-decoration: none;
     display: inline-block;
-    /* FIX: Ensure button is clickable */
     position: relative;
     z-index: 10;
 }
@@ -724,49 +689,25 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .glitch {
-        font-size: 2.5rem;
-    }
-    
-    .subtitle {
-        font-size: 1.2rem;
-    }
-    
-    .cta-button {
-        padding: 0.8rem 1.5rem;
-        min-width: 140px;
-    }
+    .glitch { font-size: 2.5rem; }
+    .subtitle { font-size: 1.2rem; }
+    .cta-button { padding: 0.8rem 1.5rem; min-width: 140px; }
 
-    .project-content {
-        flex-direction: column;
-    }
-    
-    .project-content.reverse {
-        flex-direction: column;
-    }
+    .project-content { flex-direction: column; }
+    .project-content.reverse { flex-direction: column; }
 
-    .slideshow-container {
-        max-width: 100%;
-        height: 250px;
-    }
+    .slideshow-container { max-width: 100%; height: 250px; }
 
-    /* Mobile particle optimization */
-    .particle {
-        animation-duration: 4s !important;
-    }
-    
-    /* Reduce motion for accessibility */
+    .particle { animation-duration: 4s !important; }
+
     @media (prefers-reduced-motion: reduce) {
-        .particle,
-        .contact-particle {
+        .particle, .contact-particle {
             animation: none;
             opacity: 0.3;
         }
     }
 
-    .section {
-        padding: 3rem 1rem;
-    }
+    .section { padding: 3rem 1rem; }
 
     /* Mobile Responsive Navigation*/
     nav ul {
@@ -781,11 +722,11 @@ footer {
         padding: 1rem;
         border-top: 1px solid var(--primary-color);
     }
-    
+
     nav ul.show {
         display: flex;
     }
-    
+
     .nav-toggle {
         display: block;
     }
