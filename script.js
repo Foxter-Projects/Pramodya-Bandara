@@ -192,7 +192,7 @@ function setupSectionHighlighting() {
     sections.forEach(section => observer.observe(section));
 }
 
-// --- Auto slideshow with manual override ---
+// --- Auto slideshow with manual override & video pause support ---
 class SlideShow {
     constructor(container) {
         this.container = container;
@@ -203,10 +203,12 @@ class SlideShow {
         this.currentIndex = 0;
         this.autoSlideDelay = 2000;
         this.manualTimeout = 2000;
-        
+        this.autoInterval = null;
+
         this.showSlide(this.currentIndex);
         this.startAutoSlide();
         this.setupEvents();
+        this.setupVideoPause();
     }
 
     showSlide(index) {
@@ -219,18 +221,12 @@ class SlideShow {
     prevSlide() { this.showSlide((this.currentIndex-1+this.slides.length)%this.slides.length); }
 
     startAutoSlide() {
-        this.stopAutoSlide();
+        if(this.autoInterval) clearInterval(this.autoInterval);
         this.autoInterval = setInterval(()=> this.nextSlide(), this.autoSlideDelay);
     }
 
-    stopAutoSlide() { clearInterval(this.autoInterval); }
-
-    setupEvents() {
-        if(this.prevBtn) this.prevBtn.addEventListener('click', ()=> this.manualSlide(()=> this.prevSlide()));
-        if(this.nextBtn) this.nextBtn.addEventListener('click', ()=> this.manualSlide(()=> this.nextSlide()));
-        this.dots.forEach((d,i)=>{
-            d.addEventListener('click', ()=> this.manualSlide(()=> this.showSlide(i)));
-        });
+    stopAutoSlide() {
+        clearInterval(this.autoInterval);
     }
 
     manualSlide(callback){
@@ -239,12 +235,54 @@ class SlideShow {
         clearTimeout(this.manualTimeout);
         this.manualTimeout = setTimeout(()=> this.startAutoSlide(), this.autoSlideDelay);
     }
+
+    setupEvents() {
+        if(this.prevBtn) this.prevBtn.addEventListener('click', ()=> this.manualSlide(()=> this.prevSlide()));
+        if(this.nextBtn) this.nextBtn.addEventListener('click', ()=> this.manualSlide(()=> this.nextSlide()));
+        this.dots.forEach((d,i)=> d.addEventListener('click', ()=> this.manualSlide(()=> this.showSlide(i))));
+    }
+
+    setupVideoPause() {
+        // Handle local videos
+        this.slides.forEach(slide => {
+            const localVideo = slide.querySelector('video');
+            if(localVideo) {
+                localVideo.addEventListener('play', () => this.stopAutoSlide());
+                localVideo.addEventListener('pause', () => this.startAutoSlide());
+                localVideo.addEventListener('ended', () => this.startAutoSlide());
+            }
+
+            // Handle YouTube iframes
+            const ytIframe = slide.querySelector('iframe');
+            if(ytIframe && ytIframe.src.includes('youtube')) {
+                let player;
+                function onYouTubeIframeAPIReady() {
+                    player = new YT.Player(ytIframe, {
+                        events: {
+                            'onStateChange': e => {
+                                if(e.data === YT.PlayerState.PLAYING) this.stopAutoSlide();
+                                else if(e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED) this.startAutoSlide();
+                            }
+                        }
+                    });
+                }
+                // Load API if not loaded
+                if(typeof YT === 'undefined' || typeof YT.Player === 'undefined') {
+                    let tag = document.createElement('script');
+                    tag.src = "https://www.youtube.com/iframe_api";
+                    document.body.appendChild(tag);
+                    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady.bind(this);
+                } else onYouTubeIframeAPIReady.call(this);
+            }
+        });
+    }
 }
 
+// Initialize all slideshows
 function initSlideShows() {
-    document.querySelectorAll('.slideshow-container').forEach(slideContainer => {
+    document.querySelectorAll('.slideshow-container').forEach(slideContainer=>{
         const slideshow = new SlideShow(slideContainer);
-        slideContainer.slideShowInstance = slideshow; // Link instance
+        slideContainer.slideShowInstance = slideshow; // Store reference for other uses
     });
 }
 
