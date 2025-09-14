@@ -242,10 +242,39 @@ class SlideShow {
 }
 
 function initSlideShows() {
-    document.querySelectorAll('.slideshow-container').forEach(slideContainer=>{
-        new SlideShow(slideContainer);
+    document.querySelectorAll('.slideshow-container').forEach(slideContainer => {
+        const slideshow = new SlideShow(slideContainer);
+        slideContainer.slideShowInstance = slideshow; // Link instance
     });
 }
+
+let players = [];
+
+function onYouTubeIframeAPIReady() {
+    const iframes = document.querySelectorAll('iframe[src*="youtube.com/embed"]');
+    iframes.forEach((iframe, index) => {
+        const player = new YT.Player(iframe, {
+            events: {
+                'onStateChange': (event) => onPlayerStateChange(event, index)
+            }
+        });
+        players.push(player);
+    });
+}
+
+function onPlayerStateChange(event, index) {
+    const slideShowContainers = document.querySelectorAll('.slideshow-container');
+    const slideShow = slideShowContainers[index]?.slideShowInstance;
+
+    if (!slideShow) return;
+
+    if (event.data === YT.PlayerState.PLAYING) {
+        slideShow.stopAutoSlide(); // Pause slideshow
+    } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+        slideShow.startAutoSlide(); // Resume slideshow
+    }
+}
+
 
 // Contact section particles
 function createContactParticles() {
